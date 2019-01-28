@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: plantuml
+  name: plantuml
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: plantuml
+  template:
+    metadata:
+      labels:
+        run: plantuml
+    spec:
+      containers:
+      - image: plantuml/plantuml-server:jetty
+        imagePullPolicy: Always
+        name: plantuml
+      restartPolicy: Always

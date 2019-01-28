@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: crowi
+  name: crowi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: crowi
+  template:
+    metadata:
+      labels:
+        run: crowi
+    spec:
+      containers:
+      - image: crowi/crowi
+        imagePullPolicy: Always
+        name: crowi
+        env:
+        - name: NODE_ENV
+          value: development
+        - name: MONGO_URI
+          value: mongodb://root:root@mongo:27017
+        - name: PLANTUML_URI
+          value: http://plantuml:8080
+        - name: PASSWORD_SEED
+          value: hogehoge
+        - name: FILE_UPLOAD
+          value: local
+      restartPolicy: Always
